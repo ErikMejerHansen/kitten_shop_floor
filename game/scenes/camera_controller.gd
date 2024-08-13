@@ -1,6 +1,9 @@
 extends Camera2D
 
 @export var zoom_speed = 10.0
+@export var zoom_min = 0.4
+@export var zoom_max = 2.5
+
 @export var pan_speed = 1000.0
 var zoom_target: Vector2
 
@@ -28,6 +31,10 @@ func update_zoom(delta):
 		
 	if(Input.is_action_just_pressed("camera_zoom_out")):
 		zoom_target *= 0.9
+	
+	# Clamp zoom
+	if(zoom_target.length() > zoom_max or zoom_target.length() < zoom_min):
+		zoom_target = zoom
 		
 	zoom = zoom.slerp(zoom_target, zoom_speed * delta)
 
