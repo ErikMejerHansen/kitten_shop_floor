@@ -1,4 +1,4 @@
-extends TileMap
+extends TileMapLayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,5 +26,5 @@ func _draw():
 func _input(event):
 	if Input.is_action_just_pressed("build_cellar"):		
 		var tile_pos = local_to_map(get_local_mouse_position())
-		set_cells_terrain_connect(0, [tile_pos], 0, 0)	
+		set_cells_terrain_connect([tile_pos], 0, 0)	
 	
