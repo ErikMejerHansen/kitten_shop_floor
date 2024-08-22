@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://c55jenguv0kw"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_s8euo"]
+[ext_resource type="Script" path="res://scenes/ui/controls.gd" id="2_c22n7"]
+[ext_resource type="Texture2D" uid="uid://dq6d2ywyd7t65" path="res://sprites/sheets/shovel.png" id="2_nh8j3"]
+[ext_resource type="Texture2D" uid="uid://bwre3rndf2hkk" path="res://sprites/sheets/connection@2x.png" id="3_nsk1i"]
+
+[node name="Ui" type="CanvasLayer"]
+script = ExtResource("1_s8euo")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="Controls" type="HBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 0
+alignment = 1
+script = ExtResource("2_c22n7")
+
+[node name="Expand" type="PanelContainer" parent="Control/MarginContainer/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Controls/Expand"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Controls/Expand/VBoxContainer"]
+layout_mode = 2
+text = "Expand"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/Controls/Expand/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_nh8j3")
+expand_mode = 1
+
+[node name="Connect" type="PanelContainer" parent="Control/MarginContainer/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Controls/Connect"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Controls/Connect/VBoxContainer"]
+layout_mode = 2
+text = "Connect"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/Controls/Connect/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_nsk1i")
+expand_mode = 1
