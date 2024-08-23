@@ -22,8 +22,7 @@ func _draw():
 	
 	draw_rect(rect, Color.CHARTREUSE, false, 10)
 		
-func _unhandled_input(_event):
-	print("expand")
+func _unhandled_input(event):
 	if Input.is_action_just_pressed("build_cellar") and expansion_input_enabled:		
 		var tile_pos = local_to_map(get_local_mouse_position())
 		set_cells_terrain_connect([tile_pos], 0, 0)	

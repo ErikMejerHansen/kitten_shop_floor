@@ -21,8 +21,16 @@ func _ready():
 func _process(_delta):
 	pass
 
-func expand_selected(_event: InputEvent) -> void:
-	tool_selected.emit(Game.TOOL.EXTEND_CELLAR)
+func expand_selected(event: InputEvent) -> void:
+	if event is not InputEventMouseButton:
+		return
 	
-func connect_selected(_event: InputEvent) -> void:
-	tool_selected.emit(Game.TOOL.PLACE_CONNECTOR)
+	if (event as InputEventMouseButton).button_index == 1:
+		tool_selected.emit(Game.TOOL.EXTEND_CELLAR)
+	
+func connect_selected(event: InputEvent) -> void:
+	if event is not InputEventMouseButton:
+		return
+		
+	if (event as InputEventMouseButton).button_index == 1:
+		tool_selected.emit(Game.TOOL.PLACE_CONNECTOR)
