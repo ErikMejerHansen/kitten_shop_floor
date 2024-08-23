@@ -34,4 +34,5 @@ func connect_selected(event: InputEvent) -> void:
 		return
 		
 	if (event as InputEventMouseButton).button_index == 1:
+		Input.set_custom_mouse_cursor(null)
 		tool_selected.emit(Game.TOOL.PLACE_CONNECTOR)
