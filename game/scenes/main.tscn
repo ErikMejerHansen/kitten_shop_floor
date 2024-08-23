@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://btkv611aoqoyv"]
+[gd_scene load_steps=20 format=4 uid="uid://btkv611aoqoyv"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_lok6t"]
 [ext_resource type="Script" path="res://scenes/camera_controller.gd" id="2_dp8yv"]
 [ext_resource type="Script" path="res://scenes/tile_map_controller.gd" id="2_hncm6"]
 [ext_resource type="Texture2D" uid="uid://c4q7b1inmpg3w" path="res://sprites/sheets/4x4_corners@0.5x.png" id="3_si32q"]
+[ext_resource type="Texture2D" uid="uid://cbsl17skn6y25" path="res://sprites/sheets/stone@0.5x.png" id="4_7saev"]
 [ext_resource type="Texture2D" uid="uid://bqe4v0bjij8si" path="res://sprites/sheets/fabricator@0.5x.png" id="4_8fx8l"]
 [ext_resource type="Texture2D" uid="uid://c7qsy1qef5y2s" path="res://sprites/sheets/steam_puf_alt.png" id="4_td5u0"]
 [ext_resource type="Texture2D" uid="uid://b5y43g3688abg" path="res://sprites/sheets/fabricator_sign_center_circler.png" id="5_7kgs4"]
@@ -101,6 +102,25 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.411765, 0.411765, 0.411765, 1)
 sources/0 = SubResource("TileSetAtlasSource_5r31g")
 
+[sub_resource type="Curve" id="Curve_1rci1"]
+_data = [Vector2(0.064, 1), 0.0, 1.51871, 0, 0, Vector2(0.816, 0.750172), -1.60325, -1.60325, 0, 0, Vector2(0.964, 0), -5.06873, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rm86x"]
+curve = SubResource("Curve_1rci1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_idv54"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+spread = 180.0
+initial_velocity_min = 86.21
+initial_velocity_max = 293.1
+angular_velocity_min = -148.97
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_rm86x")
+
 [sub_resource type="Gradient" id="Gradient_plx1a"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
@@ -151,6 +171,14 @@ tile_map_data = PackedByteArray("AAABAAEAAAACAAIAAAACAAEAAAADAAIAAAACAAIAAAAAAAE
 tile_set = SubResource("TileSet_qg3ci")
 script = ExtResource("2_hncm6")
 highligt_color = Color(0.467292, 0.258302, 0.0600344, 0.470588)
+
+[node name="CellarExtendedParticle" type="GPUParticles2D" parent="Cellar"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_idv54")
+texture = ExtResource("4_7saev")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1457, 251)

@@ -2,6 +2,9 @@ extends TileMapLayer
 
 @export var expansion_input_enabled = false
 @export var highligt_color: Color = Color.ALICE_BLUE
+
+@onready var cellar_extended_particle = $CellarExtendedParticle
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -28,5 +31,7 @@ func _draw():
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("build_cellar") and expansion_input_enabled:		
 		var tile_pos = local_to_map(get_local_mouse_position())
+		cellar_extended_particle.position = get_local_mouse_position()
+		cellar_extended_particle.restart()
 		set_cells_terrain_connect([tile_pos], 0, 0)	
 	
