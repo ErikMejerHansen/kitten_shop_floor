@@ -1,7 +1,7 @@
 extends CanvasLayer
+const SHOVEL = preload("res://sprites/sheets/shovel@0.13x.png")
 
 signal tool_selected(tool: Game.TOOL)
-
 @onready var expand_button = %Expand
 @onready var connect_button = %Connect
 
@@ -26,6 +26,7 @@ func expand_selected(event: InputEvent) -> void:
 		return
 	
 	if (event as InputEventMouseButton).button_index == 1:
+		Input.set_custom_mouse_cursor(SHOVEL)
 		tool_selected.emit(Game.TOOL.EXTEND_CELLAR)
 	
 func connect_selected(event: InputEvent) -> void:
