@@ -64,11 +64,11 @@ func place_tile(tile_pos: Vector2i, recurse) -> void:
 		if has_left_neighbour:
 			place_tile(tile_pos + Vector2i.LEFT, false)
 			
-func set_connector(position, atlas_coord) -> void:
+func set_connector(placement_position, atlas_coord) -> void:
 	# Second argument is the ID from the TileSet and can be seen in the TileSet menu
-	set_cell(position, 3, atlas_coord)		
+	set_cell(placement_position, 3, atlas_coord)		
 		
 
 
-func has_placed_tile_at(position: Vector2i) -> bool:
-		return get_cell_atlas_coords(position) != Vector2i(-1, -1)
+func has_placed_tile_at(location: Vector2i) -> bool:
+		return get_cell_atlas_coords(location) != Vector2i(-1, -1)
