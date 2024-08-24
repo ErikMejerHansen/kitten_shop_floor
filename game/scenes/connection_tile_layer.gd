@@ -1,12 +1,13 @@
 extends TileMapLayer
 
-
 const top_left = Vector2i(0,0)
 const horizontal = Vector2i(1,0)
 const top_right = Vector2i(2,0)
 const vertical = Vector2i(2,1)
 const bottom_right = Vector2i(2,2)
 const bottom_left = Vector2i(0,2)
+
+@export var connection_input_enabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,14 +20,9 @@ func _process(_delta):
 	
 	
 func _unhandled_input(_event):
-	
-	
-	if Input.is_action_just_pressed("build_cellar"):			
+	if Input.is_action_just_pressed("build_cellar") and connection_input_enabled:			
 		var tile_pos = local_to_map(get_local_mouse_position())
-		place_tile(tile_pos, true)
-		
-		
-		# Then fix affected neighbours
+		place_tile(tile_pos, true)		
 
 func place_tile(tile_pos: Vector2i, recurse) -> void:
 	
@@ -57,6 +53,7 @@ func place_tile(tile_pos: Vector2i, recurse) -> void:
 		or has_left_neighbour):
 		set_connector(tile_pos, vertical)	
 	
+	# Then fix affected neighbours
 	if recurse:
 		if has_top_neighbour:
 			place_tile(tile_pos + Vector2i.UP, false)

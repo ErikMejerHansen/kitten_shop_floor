@@ -2,6 +2,7 @@ extends Node2D
 class_name Main
 
 @onready var cellar = $Cellar
+@onready var connection_tile_layer = $ConnectionTileLayer
 
 		
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +16,11 @@ func _process(_delta):
 
 
 func _on_ui_tool_selected(tool):
-	if tool == Game.TOOL.EXTEND_CELLAR:
-		cellar.expansion_input_enabled = true
-	else:
-		cellar.expansion_input_enabled = false
+	cellar.expansion_input_enabled = false
+	connection_tile_layer.connection_input_enabled = false
+	match tool: 
+		Game.TOOL.EXTEND_CELLAR:
+			cellar.expansion_input_enabled = true
+		Game.TOOL.PLACE_CONNECTOR:
+			connection_tile_layer.connection_input_enabled = true
+			
