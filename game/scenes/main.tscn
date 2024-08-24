@@ -126,6 +126,75 @@ angular_velocity_max = -1.60933e-05
 gravity = Vector3(0, 98, 0)
 scale_curve = SubResource("CurveTexture_rm86x")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q0ngo"]
+texture = ExtResource("9_rr665")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/left_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/top_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_k1462"]
+tile_size = Vector2i(128, 128)
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "Waterway"
+terrain_set_0/terrain_0/color = Color(0.338634, 0.0767895, 1, 1)
+sources/3 = SubResource("TileSetAtlasSource_q0ngo")
+
+[sub_resource type="Curve" id="Curve_ew5f3"]
+min_value = -15.0
+max_value = 15.0
+_data = [Vector2(0, 0), 0.0, 2.55319, 0, 1, Vector2(1, 2.55319), 14.8707, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iplax"]
+curve = SubResource("Curve_ew5f3")
+
+[sub_resource type="Curve" id="Curve_utwnp"]
+_data = [Vector2(0.008, 0.959849), 0.0, 0.972926, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iltoc"]
+curve = SubResource("Curve_utwnp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6hpw8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0, 0, 1)
+angle_min = -153.0
+angle_max = 90.0
+angle_curve = SubResource("CurveTexture_iplax")
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(70, 0, 0)
+scale_curve = SubResource("CurveTexture_iltoc")
+
 [sub_resource type="Animation" id="Animation_3ieaf"]
 length = 0.001
 tracks/0/type = "value"
@@ -216,75 +285,6 @@ scale_max = 0.3
 color_ramp = SubResource("GradientTexture1D_dxgao")
 turbulence_noise_scale = 4.257
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q0ngo"]
-texture = ExtResource("9_rr665")
-texture_region_size = Vector2i(128, 128)
-0:0/0 = 0
-0:0/0/terrain_set = 0
-0:0/0/terrain = 0
-0:0/0/terrains_peering_bit/right_side = 0
-0:0/0/terrains_peering_bit/bottom_side = 0
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
-1:0/0/terrains_peering_bit/right_side = 0
-1:0/0/terrains_peering_bit/left_side = 0
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 0
-2:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0/terrains_peering_bit/left_side = 0
-2:1/0 = 0
-2:1/0/terrain_set = 0
-2:1/0/terrain = 0
-2:1/0/terrains_peering_bit/bottom_side = 0
-2:1/0/terrains_peering_bit/top_side = 0
-0:2/0 = 0
-0:2/0/terrain_set = 0
-0:2/0/terrain = 0
-0:2/0/terrains_peering_bit/right_side = 0
-0:2/0/terrains_peering_bit/top_side = 0
-2:2/0 = 0
-2:2/0/terrain_set = 0
-2:2/0/terrain = 0
-2:2/0/terrains_peering_bit/left_side = 0
-2:2/0/terrains_peering_bit/top_side = 0
-
-[sub_resource type="TileSet" id="TileSet_k1462"]
-tile_size = Vector2i(128, 128)
-terrain_set_0/mode = 2
-terrain_set_0/terrain_0/name = "Waterway"
-terrain_set_0/terrain_0/color = Color(0.338634, 0.0767895, 1, 1)
-sources/3 = SubResource("TileSetAtlasSource_q0ngo")
-
-[sub_resource type="Curve" id="Curve_ew5f3"]
-min_value = -15.0
-max_value = 15.0
-_data = [Vector2(0, 0), 0.0, 2.55319, 0, 1, Vector2(1, 2.55319), 14.8707, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_iplax"]
-curve = SubResource("Curve_ew5f3")
-
-[sub_resource type="Curve" id="Curve_utwnp"]
-_data = [Vector2(0.008, 0.959849), 0.0, 0.972926, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_iltoc"]
-curve = SubResource("Curve_utwnp")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6hpw8"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(0, 0, 1)
-angle_min = -153.0
-angle_max = 90.0
-angle_curve = SubResource("CurveTexture_iplax")
-direction = Vector3(0, 1, 0)
-spread = 0.0
-gravity = Vector3(70, 0, 0)
-scale_curve = SubResource("CurveTexture_iltoc")
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_lok6t")
 
@@ -308,8 +308,21 @@ position = Vector2(1457, 251)
 script = ExtResource("2_dp8yv")
 zoom_max = 3.5
 
+[node name="ConnectionTileLayer" type="TileMapLayer" parent="."]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAACAAQAAwABAAAAAAA=")
+tile_set = SubResource("TileSet_k1462")
+script = ExtResource("10_s1bky")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ConnectionTileLayer"]
+position = Vector2(396, 566)
+rotation = 1.5708
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_6hpw8")
+texture = ExtResource("11_yhit1")
+
 [node name="Fabricator" type="Sprite2D" parent="."]
-position = Vector2(257, 28)
+position = Vector2(257, 34)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_8fx8l")
 script = ExtResource("7_u1qns")
@@ -335,7 +348,7 @@ autoplay = "missing_input_bounce"
 position = Vector2(304.869, -44)
 texture = ExtResource("9_u5y6j")
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Fabricator/missing_output_indicator"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fabricator/missing_output_indicator"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_itqou")
@@ -350,16 +363,3 @@ texture = ExtResource("4_td5u0")
 lifetime = 2.0
 randomness = 0.16
 trail_sections = 2
-
-[node name="ConnectionTileLayer" type="TileMapLayer" parent="."]
-scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAACAAQAAwABAAAAAAA=")
-tile_set = SubResource("TileSet_k1462")
-script = ExtResource("10_s1bky")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ConnectionTileLayer"]
-position = Vector2(396, 566)
-rotation = 1.5708
-amount = 4
-process_material = SubResource("ParticleProcessMaterial_6hpw8")
-texture = ExtResource("11_yhit1")
