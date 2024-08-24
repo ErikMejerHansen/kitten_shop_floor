@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://btkv611aoqoyv"]
+[gd_scene load_steps=34 format=4 uid="uid://btkv611aoqoyv"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_lok6t"]
 [ext_resource type="Script" path="res://scenes/camera_controller.gd" id="2_dp8yv"]
@@ -8,8 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://bqe4v0bjij8si" path="res://sprites/sheets/fabricator@0.5x.png" id="4_8fx8l"]
 [ext_resource type="Texture2D" uid="uid://c7qsy1qef5y2s" path="res://sprites/sheets/steam_puf_alt.png" id="4_td5u0"]
 [ext_resource type="Texture2D" uid="uid://b5y43g3688abg" path="res://sprites/sheets/fabricator_sign_center_circler.png" id="5_7kgs4"]
+[ext_resource type="Script" path="res://scenes/fabricator.gd" id="7_u1qns"]
+[ext_resource type="Texture2D" uid="uid://b74pdobkq412r" path="res://sprites/sheets/input_missing_indicator.png" id="8_70c60"]
 [ext_resource type="Texture2D" uid="uid://bjmoabsawy2b4" path="res://sprites/sheets/waterways.png" id="9_rr665"]
+[ext_resource type="Texture2D" uid="uid://fjml3dxcy4sj" path="res://sprites/sheets/output_missing_indicator.png" id="9_u5y6j"]
 [ext_resource type="Script" path="res://scenes/connection_tile_layer.gd" id="10_s1bky"]
+[ext_resource type="Texture2D" uid="uid://db1al7xm2plmc" path="res://sprites/sheets/water@0.5x.png" id="11_yhit1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5r31g"]
 texture = ExtResource("3_si32q")
@@ -122,6 +126,74 @@ angular_velocity_max = -1.60933e-05
 gravity = Vector3(0, 98, 0)
 scale_curve = SubResource("CurveTexture_rm86x")
 
+[sub_resource type="Animation" id="Animation_3ieaf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("missing_input_indicator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-308, -28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("missing_output_indicator:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(304.869, -44)]
+}
+
+[sub_resource type="Animation" id="Animation_bfh0x"]
+resource_name = "missing_input_bounce"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("missing_input_indicator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.375, 1),
+"update": 0,
+"values": [Vector2(-310, -28), Vector2(-340, -28)]
+}
+
+[sub_resource type="Animation" id="Animation_041ms"]
+resource_name = "missing_output_bounce"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("missing_output_indicator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.375, 1),
+"update": 0,
+"values": [Vector2(305, -44), Vector2(335, -44)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_itqou"]
+_data = {
+"RESET": SubResource("Animation_3ieaf"),
+"missing_input_bounce": SubResource("Animation_bfh0x"),
+"missing_output_bounce": SubResource("Animation_041ms")
+}
+
 [sub_resource type="Gradient" id="Gradient_plx1a"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
@@ -185,6 +257,34 @@ terrain_set_0/terrain_0/name = "Waterway"
 terrain_set_0/terrain_0/color = Color(0.338634, 0.0767895, 1, 1)
 sources/3 = SubResource("TileSetAtlasSource_q0ngo")
 
+[sub_resource type="Curve" id="Curve_ew5f3"]
+min_value = -15.0
+max_value = 15.0
+_data = [Vector2(0, 0), 0.0, 2.55319, 0, 1, Vector2(1, 2.55319), 14.8707, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iplax"]
+curve = SubResource("Curve_ew5f3")
+
+[sub_resource type="Curve" id="Curve_utwnp"]
+_data = [Vector2(0.008, 0.959849), 0.0, 0.972926, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iltoc"]
+curve = SubResource("Curve_utwnp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6hpw8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0, 0, 1)
+angle_min = -153.0
+angle_max = 90.0
+angle_curve = SubResource("CurveTexture_iplax")
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(70, 0, 0)
+scale_curve = SubResource("CurveTexture_iltoc")
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_lok6t")
 
@@ -212,12 +312,35 @@ zoom_max = 3.5
 position = Vector2(257, 28)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_8fx8l")
+script = ExtResource("7_u1qns")
 
 [node name="Sign" type="Sprite2D" parent="Fabricator"]
 position = Vector2(-7.99998, -40)
 rotation = 0.0680678
 scale = Vector2(0.5, 0.506)
 texture = ExtResource("5_7kgs4")
+
+[node name="missing_input_indicator" type="Sprite2D" parent="Fabricator"]
+position = Vector2(-308, -28)
+texture = ExtResource("8_70c60")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fabricator/missing_input_indicator"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_itqou")
+}
+autoplay = "missing_input_bounce"
+
+[node name="missing_output_indicator" type="Sprite2D" parent="Fabricator"]
+position = Vector2(304.869, -44)
+texture = ExtResource("9_u5y6j")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Fabricator/missing_output_indicator"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_itqou")
+}
+autoplay = "missing_output_bounce"
 
 [node name="Leak" type="GPUParticles2D" parent="."]
 position = Vector2(301, 25)
@@ -230,5 +353,13 @@ trail_sections = 2
 
 [node name="ConnectionTileLayer" type="TileMapLayer" parent="."]
 scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAACAAQAAwABAAAAAAA=")
 tile_set = SubResource("TileSet_k1462")
 script = ExtResource("10_s1bky")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ConnectionTileLayer"]
+position = Vector2(396, 566)
+rotation = 1.5708
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_6hpw8")
+texture = ExtResource("11_yhit1")
